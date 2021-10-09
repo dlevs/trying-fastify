@@ -1,17 +1,15 @@
-import { fastify } from 'fastify'
-import { registerHelloRoute } from './routes/hello'
+import Fastify from 'fastify'
+import helloRoute from './routes/hello'
 
-const app = fastify({ logger: true })
+const fastify = Fastify({ logger: true })
 
-registerHelloRoute(app, '/')
-registerHelloRoute(app, '/hello')
+fastify.register(helloRoute)
 
-// Run the server!
 const start = async () => {
   try {
-    await app.listen(3000)
+    await fastify.listen(3000)
   } catch (err) {
-    app.log.error(err)
+    fastify.log.error(err)
     process.exit(1)
   }
 }

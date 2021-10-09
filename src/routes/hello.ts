@@ -1,25 +1,25 @@
-import type { FastifyInstance } from 'fastify'
-import { Static, Type } from '@sinclair/typebox'
+import type { FastifyPluginCallback } from 'fastify'
+import { Type } from '@sinclair/typebox'
+import { SchemaRouteType } from '../lib/types'
 
-const Querystring = Type.Object({ name: Type.String() })
-const ResponseBody = Type.Object({
-  hello: Type.String(),
-})
+const schema = {
+  querystring: Type.Object({
+    name: Type.String(),
+  }),
+  response: {
+    200: Type.Object({
+      hello: Type.String(),
+    }),
+  },
+}
 
-export const registerHelloRoute = (app: FastifyInstance, url: string) => {
-  // Declare a route
-  app.route<{
-    Querystring: Static<typeof Querystring>
-    Reply: Static<typeof ResponseBody>
-  }>({
-    url,
-    method: 'GET',
-    schema: {
-      querystring: Querystring,
-      response: { 200: ResponseBody },
-    },
+const registerHelloRoute: FastifyPluginCallback = async (fastify) => {
+  fastify.get<SchemaRouteType<typeof schema>>('/', {
+    schema,
     async handler(request) {
       return { hello: `${request.query.name}!` }
     },
   })
 }
+
+export default registerHelloRoute

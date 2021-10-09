@@ -13,7 +13,7 @@ const schema = {
   },
 }
 
-const registerHelloRoute: FastifyPluginCallback = async (fastify) => {
+export const helloRoute: FastifyPluginCallback = async (fastify) => {
   fastify.get<SchemaRouteType<typeof schema>>('/', {
     schema,
     async handler(request) {
@@ -21,5 +21,3 @@ const registerHelloRoute: FastifyPluginCallback = async (fastify) => {
     },
   })
 }
-
-export default registerHelloRoute

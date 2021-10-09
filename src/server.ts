@@ -1,5 +1,5 @@
 import Fastify from 'fastify'
-import helloRoute from './routes/hello'
+import { helloRoute } from './routes/hello'
 
 const fastify = Fastify({ logger: true })
 

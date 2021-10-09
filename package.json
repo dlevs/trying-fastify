@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "@sinclair/typebox": "^0.20.5",
-    "fastify": "^3.22.0"
+    "fastify": "^3.22.0",
+    "pino-pretty": "^7.0.1"
   },
   "devDependencies": {
     "@types/node": "^16.10.3",

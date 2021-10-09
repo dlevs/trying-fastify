@@ -1,7 +1,8 @@
 import Fastify from 'fastify'
 import { helloRoute } from './routes/hello'
 
-const fastify = Fastify({ logger: true })
+// TODO: Turn on pretty print only for local dev
+const fastify = Fastify({ logger: { prettyPrint: true } })
 
 fastify.register(helloRoute)
 

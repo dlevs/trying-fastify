@@ -17,7 +17,11 @@ export const helloRoute: FastifyPluginCallback = async (fastify) => {
   fastify.get<SchemaRouteType<typeof schema>>('/', {
     schema,
     async handler(request) {
-      return { hello: `${request.query.name}!` }
+      const { name } = request.query
+
+      request.log.info({ name }, 'Greeting user')
+
+      return { hello: `${name}!` }
     },
   })
 }
